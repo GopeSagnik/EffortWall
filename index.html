@@ -1,250 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="/images/appwrite.svg" />
-  <title>Appwrite + Javascript </title>
-  <link rel="stylesheet" href="./style/app.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
-  <link
-          href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:opsz,wght@14..32,100..900&family=Poppins:wght@300;400&display=swap"
-          rel="stylesheet"
-  />
-  <link rel="icon" type="image/svg+xml" href="/appwrite.svg" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EffortWall</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <!-- Chart.js DataLabels Plugin CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <!-- html2canvas CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Link to your custom CSS file -->
+    <link rel="stylesheet" href="./style/style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/EWLogo.png">
+
 </head>
-<body class="bg-[#FAFAFB] font-[Inter] text-sm text-[#56565C]">
-<main class="checker-background flex flex-col items-center p-5" id="main">
-  <div class="mt-25 flex w-full max-w-[40em] items-center justify-center lg:mt-34">
-    <div class="rounded-[25%] border border-[#19191C0A] bg-[#F9F9FA] p-3 shadow-[0px_9.36px_9.36px_0px_hsla(0,0%,0%,0.04)]">
-      <div class="rounded-[25%] border border-[#FAFAFB] bg-white p-5 shadow-[0px_2px_12px_0px_hsla(0,0%,0%,0.03)] lg:p-9">
-        <img alt="Javascript logo" src="./images/javascript.svg" class="h-14 w-14" width="56" height="56">
-      </div>
-    </div>
-    <div class="flex w-38 items-center transition-opacity duration-2500 opacity-0" id="success-icon">
-      <div class="to-[rgba(253, 54, 110, 0.15)] h-[1px] flex-1 bg-gradient-to-l from-[#f02e65]"></div>
-      <div class="icon-check flex h-5 w-5 items-center justify-center rounded-full border border-[#FD366E52] bg-[#FD366E14] text-[#FD366E]"></div>
-      <div class="to-[rgba(253, 54, 110, 0.15)] h-[1px] flex-1 bg-gradient-to-r from-[#f02e65]"></div>
-    </div>
-    <div class="rounded-[25%] border border-[#19191C0A] bg-[#F9F9FA] p-3 shadow-[0px_9.36px_9.36px_0px_hsla(0,0%,0%,0.04)]">
-      <div class="rounded-[25%] border border-[#FAFAFB] bg-white p-5 shadow-[0px_2px_12px_0px_hsla(0,0%,0%,0.03)] lg:p-9">
-        <img alt="Appwrite logo" src="./images/appwrite.svg" class="h-14 w-14" width="56" height="56">
-      </div>
-    </div>
-  </div>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="container main-card">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-100">EffortWall</h1>
 
-  <section class="mt-12 flex h-52 flex-col items-center" id="status-section">
-    <div class="flex flex-row gap-4" id="loading-spinner" style="display: none;">
-      <div role="status">
-        <svg aria-hidden="true" class="h-5 w-5 animate-spin fill-[#FD366E] text-gray-200 dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-          <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-        </svg>
-        <span class="sr-only">Loading...</span>
-      </div>
-      <span>Waiting for connection...</span>
-    </div>
-    <h1 class="font-[Poppins] text-2xl font-light text-[#2D2D31]" id="status-message">Check connection</h1>
-    <p class="mt-2 mb-8" id="status-description">Send a ping to verify the connection</p>
-    <button class="cursor-pointer rounded-md bg-[#FD366E] px-2.5 py-1.5" id="ping-button">
-      <span class="text-white">Send a ping</span>
-    </button>
-  </section>
+        <!-- Status Message Display -->
+        <div id="statusMessage" class="text-center mb-4 text-sm font-medium text-gray-400">
+            Connecting to Appwrite...
+        </div>
 
-  <div class="grid grid-rows-3 gap-7 lg:grid-cols-3 lg:grid-rows-none">
-    <div class="flex h-full w-72 flex-col gap-2 rounded-md border border-[#EDEDF0] bg-white p-4">
-      <h2 class="text-xl font-light text-[#2D2D31]">Edit your app</h2>
-      <p>Edit <code class="rounded-sm bg-[#EDEDF0] p-1">app/page.js</code> to get started with building your app.</p>
-    </div>
-    <a href="https://cloud.appwrite.io" target="_blank" rel="noopener noreferrer">
-      <div class="flex h-full w-72 flex-col gap-2 rounded-md border border-[#EDEDF0] bg-white p-4">
-        <div class="flex flex-row items-center justify-between">
-          <h2 class="text-xl font-light text-[#2D2D31]">Go to console</h2>
-          <span class="icon-arrow-right text-[#D8D8DB]"></span>
-        </div>
-        <p>Navigate to the console to control and oversee the Appwrite services.</p>
-      </div>
-    </a>
-    <a href="https://appwrite.io/docs" target="_blank" rel="noopener noreferrer">
-      <div class="flex h-full w-72 flex-col gap-2 rounded-md border border-[#EDEDF0] bg-white p-4">
-        <div class="flex flex-row items-center justify-between">
-          <h2 class="text-xl font-light text-[#2D2D31]">Explore docs</h2>
-          <span class="icon-arrow-right text-[#D8D8DB]"></span>
-        </div>
-        <p>Discover the full power of Appwrite by diving into our documentation.</p>
-      </div>
-    </a>
-  </div>
+        <!-- Adjusted grid layout for 30-70 split -->
+        <div class="grid grid-cols-1 md:grid-cols-[30%_70%] gap-8">
+            <!-- Left Column: Forms (30%) -->
+            <div class="space-y-6">
+                <!-- Log Time Form -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold text-gray-100 mb-4">Log Time</h2>
+                    <form id="timeTrackForm" class="space-y-4">
+                        <div>
+                            <label for="teamMemberTime" class="block text-sm font-medium text-gray-300">Team Member</label>
+                            <select id="teamMemberTime" class="input-select mt-1" required>
+                                <option value="">Loading Team Members...</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="activity" class="block text-sm font-medium text-gray-300">Activity</label>
+                            <select id="activity" class="input-select mt-1" required>
+                                <option value="">Select Activity</option>
+                                <!-- Options populated by JS from activityCategories -->
+                            </select>
+                        </div>
+                        <div>
+                            <label for="ticketNumber" class="block text-sm font-medium text-gray-300">Ticket Number (Optional)</label>
+                            <input type="text" id="ticketNumber" class="input-text mt-1" placeholder="e.g., SUP-12345">
+                        </div>
+                        <div>
+                            <label for="hoursSpent" class="block text-sm font-medium text-gray-300">Duration (hours)</label>
+                            <input type="number" id="hoursSpent" class="input-text mt-1" placeholder="0.00" step="0.01" required>
+                        </div>
+                        <div>
+                            <label for="trackDate" class="block text-sm font-medium text-gray-300">Date</label>
+                            <input type="date" id="trackDate" class="input-text mt-1" required>
+                        </div>
+                        <div>
+                            <label for="notes" class="block text-sm font-medium text-gray-300">Notes (Optional)</label>
+                            <textarea id="notes" class="input-textarea mt-1" placeholder="Add any relevant notes..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2" id="logEffortBtn">
+                            <span id="logEffortBtnText">Submit Log</span>
+                            <div id="logEffortSpinner" class="spinner hidden"></div>
+                        </button>
+                    </form>
+                </div>
 
-  <aside class="fixed bottom-0 flex w-full cursor-pointer border-t border-[#EDEDF0] bg-white">
-    <details id="logs-details" class="w-full">
-      <summary class="flex w-full flex-row justify-between p-4 marker:content-none">
-        <div class="flex gap-2">
-          <span class="font-semibold">Logs</span>
-          <div class="flex items-center rounded-md bg-[#E6E6E6] px-2" id="log-count" style="display: none;">
-            <span class="font-semibold" id="log-count-value"></span>
-          </div>
-        </div>
-        <div class="icon">
-          <span class="icon-cheveron-down" aria-hidden="true"></span>
-        </div>
-      </summary>
-      <div class="flex w-full flex-col lg:flex-row">
-        <div class="flex flex-col border-r border-[#EDEDF0]">
-          <div class="border-y border-[#EDEDF0] bg-[#FAFAFB] px-4 py-2 text-[#97979B]">Project</div>
-          <div class="grid grid-cols-2 gap-4 p-4">
-            <div class="flex flex-col">
-              <span class="text-[#97979B]">Endpoint</span>
-              <span class="truncate" id="project-endpoint"></span>
+                <!-- Record Holiday/Leave Form -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold text-gray-100 mb-4">Record Holiday/Leave</h2>
+                    <form id="holidayForm" class="space-y-4">
+                        <div>
+                            <label for="teamMemberHoliday" class="block text-sm font-medium text-gray-300">Team Member</label>
+                            <select id="teamMemberHoliday" class="input-select mt-1" required>
+                                <option value="">Loading Team Members...</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="holidayStartDate" class="block text-sm font-medium text-gray-300">Start Date</label>
+                            <input type="date" id="holidayStartDate" class="input-text mt-1" required>
+                        </div>
+                        <div>
+                            <label for="holidayEndDate" class="block text-sm font-medium text-gray-300">End Date</label>
+                            <input type="date" id="holidayEndDate" class="input-text mt-1" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">Type</label>
+                            <div class="flex items-center space-x-4">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="holidayType" value="Holiday" class="form-radio text-indigo-500" checked>
+                                    <span class="ml-2 text-gray-300">Holiday</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="holidayType" value="Leave" class="form-radio text-indigo-500">
+                                    <span class="ml-2 text-gray-300">Leave</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="holidayReason" class="block text-sm font-medium text-gray-300">Reason</label>
+                            <textarea id="holidayReason" class="input-textarea mt-1" placeholder="e.g., Annual vacation" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2" id="markHolidayBtn">
+                            <span id="markHolidayBtnText">Submit Holiday/Leave</span>
+                            <div id="markHolidaySpinner" class="spinner hidden"></div>
+                        </button>
+                    </form>
+                </div>
             </div>
-            <div class="flex flex-col">
-              <span class="text-[#97979B]">Project-ID</span>
-              <span class="truncate" id="project-id"></span>
+
+            <!-- Right Column: Activity Feed (70%) -->
+            <div class="card">
+                <!-- Activity Feed Heading and Refresh Button -->
+                <h2 class="text-xl font-semibold text-gray-100 mb-4 flex items-center gap-2">
+                    <span>Activity Feed</span>
+                    <!-- Refresh Button - Icon Only -->
+                    <button class="px-2 py-0.5 rounded-full bg-blue-700 hover:bg-blue-600 text-white shadow-sm flex items-center justify-center text-xs" id="refreshDataBtn">
+                        <i class="fas fa-sync-alt"></i>
+                        <div id="refreshDataSpinner" class="spinner hidden"></div>
+                    </button>
+                </h2>
+
+                <!-- Display Mode Tabs -->
+                <div class="flex justify-center space-x-2 mb-6 text-xs text-gray-400">
+                    <button class="px-3 py-1 rounded-full bg-indigo-700 text-white shadow-sm" id="tableViewBtn">Table</button>
+                    <button class="px-3 py-1 rounded-full bg-gray-700 hover:bg-gray-600" id="chartsViewBtn">Summary</button>
+                    <button class="px-3 py-1 rounded-full bg-gray-700 hover:bg-gray-600" id="holidaysViewBtn">Holidays</button>
+                    <button class="px-3 py-1 rounded-full bg-gray-700 hover:bg-gray-600" id="manageViewBtn">Manage</button>
+                </div>
+
+                <!-- Filter Controls - These will apply to Table, Holidays, and Summary (Charts) views -->
+                <div id="filterControls" class="mb-6">
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="filterStartDate" class="block text-sm font-medium text-gray-300">Start Date</label>
+                            <input type="date" id="filterStartDate" class="input-text mt-1">
+                        </div>
+                        <div>
+                            <label for="filterEndDate" class="block text-sm font-medium text-gray-300">End Date</label>
+                            <input type="date" id="filterEndDate" class="input-text mt-1">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                         <div id="filterTeamMemberWrapper">
+                            <label for="filterTeamMember" class="block text-sm font-medium text-gray-300">Team Member</label>
+                            <select id="filterTeamMember" class="input-select mt-1">
+                                <option value="">All Team Members</option>
+                                <!-- Options populated by JS -->
+                            </select>
+                        </div>
+                        <div id="filterActivityWrapper">
+                            <label for="filterActivity" class="block text-sm font-medium text-gray-300">Activity</label>
+                            <select id="filterActivity" class="input-select mt-1">
+                                <option value="">All Activities</option>
+                                <!-- Options populated by JS from activityCategories -->
+                            </select>
+                        </div>
+                        <div id="filterHolidayTypeWrapper" class="hidden">
+                            <label for="filterHolidayType" class="block text-sm font-medium text-gray-300">Type</label>
+                            <select id="filterHolidayType" class="input-select mt-1">
+                                <option value="">All Types</option>
+                                <option value="Holiday">Holiday</option>
+                                <option value="Leave">Leave</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center gap-4">
+                        <button id="applyFiltersBtn" class="btn-primary">Apply Filters</button>
+                        <button id="resetFiltersBtn" class="btn-secondary">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Data Display - Will hold tables for Table & Holidays, and the summary table for Charts -->
+                <div id="dataContainer" class="overflow-x-auto rounded-lg shadow-inner bg-gray-800 p-2">
+                    <p class="text-gray-500 text-center py-8">No entries yet. Log some effort or mark a holiday!</p>
+                </div>
+
+                <!-- Resource Utilization Chart Container -->
+                <div id="utilizationChartContainer" class="mt-8 p-4 bg-gray-800 rounded-lg shadow-md hidden">
+                    <h3 class="text-lg font-semibold text-gray-100 mb-4 text-center">Resource Utilization %</h3>
+                    <canvas id="utilizationChart"></canvas>
+                </div>
+
+                <!-- Copy Buttons Section - Visibility controlled by JS -->
+                <div id="copyButtonsContainer" class="flex justify-center space-x-4 mt-6 hidden">
+                    <button id="copyTableBtn" class="btn-secondary flex items-center justify-center gap-2">
+                        <i class="fas fa-copy"></i> <span id="copyTableBtnText">Copy Table as Image</span>
+                        <div id="copyTableSpinner" class="spinner hidden"></div>
+                    </button>
+                    <!-- Wrapper for Copy Graph Button - Initially hidden -->
+                    <div id="copyGraphButtonWrapper" class="hidden">
+                        <button id="copyChartBtn" class="btn-secondary flex items-center justify-center gap-2">
+                            <i class="fas fa-chart-bar"></i> <span id="copyChartBtnText">Copy Graph as Image</span>
+                            <div id="copyChartSpinner" class="spinner hidden"></div>
+                        </button>
+                    </div>
+                </div>
+
+
+                <!-- Manage Team Members and Activity Categories Section (Hidden by default) -->
+                <div id="manageTeamMembersSection" class="hidden mt-8">
+                    <!-- Team Member Management Card -->
+                    <div class="card mb-6">
+                        <h2 class="text-xl font-semibold text-gray-100 mb-4">Manage Team Members</h2>
+                        <form id="addTeamMemberForm" class="space-y-4">
+                            <div>
+                                <label for="newTeamMemberName" class="block text-sm font-medium text-gray-300">Team Member Name</label>
+                                <input type="text" id="newTeamMemberName" class="input-text mt-1" placeholder="e.g., John Doe" required>
+                            </div>
+                            <div>
+                                <label for="newTeamMemberHours" class="block text-sm font-medium text-gray-300">Daily Work Hours</label>
+                                <input type="number" id="newTeamMemberHours" class="input-text mt-1" placeholder="e.g., 8 or 4" step="0.5" min="0" required>
+                            </div>
+                            <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2" id="addTeamMemberBtn">
+                                <span id="addTeamMemberBtnText">Add Team Member</span>
+                                <div id="addTeamMemberSpinner" class="spinner hidden"></div>
+                            </button>
+                        </form>
+
+                        <div class="mt-6">
+                            <h3 class="text-lg font-semibold text-gray-100 mb-3">Existing Team Members:</h3>
+                            <div id="teamMemberList" class="space-y-2 max-h-48 overflow-y-auto custom-scroll">
+                                <p class="text-gray-500 text-center py-4">No team members added yet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Category Management Card -->
+                    <div id="activityCategoryManagement" class="card mb-6 hidden">
+                        <h2 class="text-xl font-semibold text-gray-100 mb-4">Manage Activity Categories</h2>
+                        <form id="addActivityCategoryForm" class="space-y-4">
+                            <div>
+                                <label for="newActivityCategoryName" class="block text-sm font-medium text-gray-300">Category Name</label>
+                                <input type="text" id="newActivityCategoryName" class="input-text mt-1" placeholder="e.g., Development" required>
+                            </div>
+                            <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2" id="addActivityCategoryBtn">
+                                <span id="addActivityCategoryBtnText">Add Category</span>
+                                <div id="addActivityCategorySpinner" class="spinner hidden"></div>
+                            </button>
+                        </form>
+
+                        <div class="mt-6">
+                            <h3 class="text-lg font-semibold text-gray-100 mb-3">Existing Categories:</h3>
+                            <div id="activityCategoryList" class="space-y-2 max-h-48 overflow-y-auto custom-scroll">
+                                <p class="text-gray-500 text-center py-4">No categories added yet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone (New Section) -->
+                    <div class="card danger-zone-card mt-6">
+                        <h2 class="text-xl font-semibold text-red-300 mb-4 flex items-center gap-2">
+                            <i class="fas fa-exclamation-triangle"></i> Danger Zone
+                        </h2>
+                        <p class="text-red-200 text-sm mb-4">
+                            These actions are irreversible. Proceed with extreme caution.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <button id="deleteAllTimeEntriesBtn" class="btn-danger flex items-center justify-center gap-2">
+                                <i class="fas fa-history"></i> <span id="deleteAllTimeEntriesBtnText">Delete All Time Entries</span>
+                                <div id="deleteAllTimeEntriesSpinner" class="spinner hidden"></div>
+                            </button>
+                            <button id="deleteAllHolidayRecordsBtn" class="btn-danger flex items-center justify-center gap-2">
+                                <i class="fas fa-plane"></i> <span id="deleteAllHolidayRecordsBtnText">Delete All Holiday Records</span>
+                                <div id="deleteAllHolidayRecordsSpinner" class="spinner hidden"></div>
+                            </button>
+                            <button id="deleteAllTeamMembersBtn" class="btn-danger flex items-center justify-center gap-2">
+                                <i class="fas fa-users"></i> <span id="deleteAllTeamMembersBtnText">Delete All Team Members</span>
+                                <div id="deleteAllTeamMembersSpinner" class="spinner hidden"></div>
+                            </button>
+                            <button id="deleteAllActivityCategoriesBtn" class="btn-danger flex items-center justify-center gap-2">
+                                <i class="fas fa-tags"></i> <span id="deleteAllActivityCategoriesBtnText">Delete All Activity Categories</span>
+                                <div id="deleteAllActivityCategoriesSpinner" class="spinner hidden"></div>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <div class="flex flex-col">
-              <span class="text-[#97979B]">Project name</span>
-              <span class="truncate" id="project-name"></span>
-            </div>
-          </div>
         </div>
-        <div class="flex-grow">
-          <table class="w-full">
-            <thead>
-            <tr class="border-y border-[#EDEDF0] bg-[#FAFAFB] text-[#97979B]">
-              <td class="w-52 py-2 pl-4">Date</td>
-              <td>Status</td>
-              <td>Method</td>
-              <td class="hidden lg:table-cell">Path</td>
-              <td class="hidden lg:table-cell">Response</td>
-            </tr>
-            </thead>
-            <tbody id="log-table">
-            <tr>
-              <td class="py-2 pl-4 font-[Fira_Code]">There are no logs to show</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </details>
-  </aside>
-</main>
 
-<script type="module">
-  import { client } from "./lib/appwrite.js";
-  import { AppwriteException } from "appwrite";
-  import "@appwrite.io/pink-icons";
+        <!-- Modal Placeholder -->
+        <div id="messageModal"></div>
+    </div>
 
-  document.addEventListener("DOMContentLoaded", () => {
-    let logs = [];
-    let status = "idle";
-    let showLogs = false;
-
-    const detailsRef = document.getElementById("logs-details");
-    const main = document.getElementById("main");
-    const statusMessage = document.getElementById("status-message");
-    const statusDescription = document.getElementById("status-description");
-    const pingButton = document.getElementById("ping-button");
-    const loadingSpinner = document.getElementById("loading-spinner");
-    const successIcon = document.getElementById("success-icon");
-    const logCount = document.getElementById("log-count");
-    const logCountValue = document.getElementById("log-count-value");
-    const logTable = document.getElementById("log-table");
-
-    const updateHeight = () => {
-      if (detailsRef) {
-        const height = detailsRef.clientHeight;
-        main.style.marginBottom = `${height}px`;
-      }
-    };
-
-    window.addEventListener("resize", updateHeight);
-
-    detailsRef.addEventListener("toggle", updateHeight);
-
-    async function sendPing() {
-      if (status === "loading") return;
-      status = "loading";
-      statusMessage.textContent = "";
-      statusDescription.textContent = "";
-      pingButton.style.display = "none";
-      loadingSpinner.style.display = "flex";
-
-      try {
-        const result = await client.ping();
-        const log = {
-          date: new Date(),
-          method: "GET",
-          path: "/v1/ping",
-          status: 200,
-          response: JSON.stringify(result),
-        };
-        logs.unshift(log);
-        status = "success";
-        statusMessage.textContent = "Congratulations!";
-        statusDescription.textContent = "You connected your app successfully.";
-
-        updateLogs();
-      } catch (err) {
-        const log = {
-          date: new Date(),
-          method: "GET",
-          path: "/v1/ping",
-          status: err instanceof AppwriteException ? err.code : 500,
-          response: err instanceof AppwriteException ? err.message : "Something went wrong",
-        };
-        logs.unshift(log);
-        status = "error";
-        statusMessage.textContent = "Check connection";
-        statusDescription.textContent = "Send a ping to verify the connection";
-        updateLogs();
-      }
-      pingButton.style.display = "block";
-      loadingSpinner.style.display = "none";
-      successIcon.style.opacity = status === "success" ? "100" : "0";
-      showLogs = true;
-    }
-
-    const updateLogs = () => {
-      logTable.innerHTML = "";
-      if (logs.length > 0) {
-        logCount.style.display = "flex";
-        logCountValue.textContent = logs.length;
-        logs.forEach((log) => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-          <td class="py-2 pl-4 font-[Fira_Code]">${log.date.toLocaleString("en-US", {
-            month: "short",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          })}</td>
-          <td>
-            <div class="w-fit rounded-sm ${log.status > 400 ? "bg-[#FF453A3D] text-[#B31212]" : "bg-[#10B9813D] text-[#0A714F]"} px-1">
-              ${log.status}
-            </div>
-          </td>
-          <td>${log.method}</td>
-          <td class="hidden lg:table-cell">${log.path}</td>
-          <td class="hidden font-[Fira_Code] lg:table-cell">${log.response}</td>
-        `;
-          logTable.appendChild(row);
-        });
-      } else {
-        logCount.style.display = "none";
-        const row = document.createElement("tr");
-        row.innerHTML = `<td class="py-2 pl-4 font-[Fira_Code]">There are no logs to show</td>`;
-        logTable.appendChild(row);
-      }
-    };
-
-    pingButton.addEventListener("click", sendPing);
-    document.getElementById('project-endpoint').textContent = import.meta.env.VITE_APPWRITE_ENDPOINT;
-    document.getElementById('project-id').textContent = import.meta.env.VITE_APPWRITE_PROJECT_ID;
-    document.getElementById('project-name').textContent = import.meta.env.VITE_APPWRITE_PROJECT_NAME;
-    updateHeight();
-  });
-</script>
+    <!-- Link to your JavaScript files -->
+    <script type="module" src="./lib/script.js"></script>
+    <script type="module" src="./lib/clipboardModule.js"></script>
 </body>
 </html>

@@ -1,0 +1,378 @@
+/* style.css */
+
+body {
+    font-family: 'Inter', sans-serif;
+    /* Deeper dark background with a reddish-pink diagonal gradient, starting with a hint of blue/cyan */
+    background: linear-gradient(135deg, #1f2a38, #100c14, #1a0a1a, #2a0a2a); /* Original background gradient */
+    color: #e0e0e0; /* Lighter gray for general text */
+    min-height: 100vh; /* Ensure gradient covers full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem; /* Reduced overall padding slightly to give more content space */
+    box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+}
+.container {
+    max-width: 1400px; /* Increased width slightly for more table space */
+    margin: 0 auto;
+    width: 100%; /* Ensure container takes full width on smaller screens */
+}
+/* Main container card with a softer dark background */
+.main-card {
+    background-color: rgba(18, 18, 22, 0.9); /* Very dark, semi-transparent black for depth */
+    border-radius: 1.25rem; /* More rounded */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 8px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+    padding: 2.5rem; /* Increased internal padding */
+    backdrop-filter: blur(5px); /* Subtle blur effect */
+    -webkit-backdrop-filter: blur(5px); /* Safari support */
+}
+
+/* Card styling for internal sections */
+.card {
+    background-color: rgba(25, 25, 30, 0.85); /* Slightly lighter internal card background */
+    border-radius: 0.85rem; /* Rounded corners for cards */
+    padding: 1.75rem; /* Internal padding for cards */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Card specific shadow */
+    border: 1px solid rgba(60, 60, 70, 0.3); /* Subtle border */
+}
+
+/* Input fields, selects, textareas */
+.input-text, .input-select, .input-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: rgba(40, 40, 50, 0.9); /* Darker input background */
+    border: 1px solid rgba(80, 80, 90, 0.5); /* Softer border */
+    border-radius: 0.5rem;
+    color: #e0e0e0;
+    transition: all 0.2s ease-in-out;
+}
+.input-text:focus, .input-select:focus, .input-textarea:focus {
+    outline: none;
+    border-color: #ff6b6b; /* Reddish-pink focus - original */
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.5); /* Glow effect - original */
+}
+.input-textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* Custom scrollbar for overflow areas */
+.custom-scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; /* For horizontal scrollbar if needed */
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+    background: rgba(30, 30, 35, 0.7); /* Darker track */
+    border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: rgba(80, 80, 90, 0.8); /* Darker thumb */
+    border-radius: 10px;
+    border: 2px solid rgba(30, 30, 35, 0.7); /* Match track background */
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: #ff6b6b; /* Reddish-pink on hover - original */
+}
+
+
+/* Primary Button */
+.btn-primary {
+    background: linear-gradient(90deg, #ff6b6b, #ee4a4a); /* Reddish-pink gradient - original */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.6rem; /* Slightly more rounded */
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+    border: none; /* Remove default button border */
+}
+.btn-primary:hover {
+    background: linear-gradient(90deg, #ee4a4a, #ff6b6b); /* Reverse gradient on hover - original */
+    box-shadow: 0 6px 15px rgba(255, 107, 107, 0.5); /* Cyan glow on hover - original */
+    transform: translateY(-2px);
+}
+.btn-primary:disabled {
+    background: linear-gradient(90deg, #6b6b6b, #5a5a5a);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.7;
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: rgba(60, 60, 70, 0.9); /* Dark grey */
+    color: #e0e0e0;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.6rem;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: none;
+}
+.btn-secondary:hover {
+    background-color: rgba(80, 80, 90, 0.9);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+.btn-secondary:disabled {
+    background-color: rgba(40, 40, 45, 0.9);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.7;
+}
+
+/* Spinner (can be inline or block based on usage) */
+.spinner {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid #fff;
+    border-radius: 50%;
+    width: 1em; /* Relative to font-size of parent */
+    height: 1em;
+    animation: spin 1s linear infinite;
+    display: inline-block; /* Ensure it respects text alignment */
+    vertical-align: middle; /* Align with text */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Table specific styling (Updated for responsiveness and clarity) */
+#dataContainer {
+    overflow-x: auto; /* Allows horizontal scrolling only if content overflows */
+    border-radius: 0.75rem; /* Consistent rounded corners */
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4); /* Inner shadow for depth */
+    background-color: rgba(20, 20, 25, 0.8); /* Slightly darker background for the scrollable area - Kept for scrollable container */
+}
+
+#dataContainer table {
+    width: 100%; /* Ensure table takes full width of its container */
+    border-collapse: separate; /* Allows border-radius on table */
+    border-spacing: 0;
+    min-width: 700px; /* Minimum width to prevent excessive squishing on small screens */
+}
+
+#dataContainer th, #dataContainer td {
+    padding: 0.85rem 1rem; /* Slightly more padding, reduced horizontal for more space */
+    text-align: left;
+    border-bottom: 1px solid rgba(60, 60, 70, 0.5); /* Softer dark border */
+    vertical-align: top; /* Align content to top for multi-line cells */
+}
+#dataContainer thead {
+    background-color: rgba(18, 18, 22, 0.9); /* Even darker header background */
+    border-bottom: 2px solid #ff6b6b; /* Reddish-pink accent border for header - original */
+}
+#dataContainer th {
+    font-size: 0.75rem; /* Smaller font for headers */
+    font-weight: 600; /* Bolder */
+    color: #a0a0a0; /* Muted header text */
+    text-transform: uppercase;
+    letter-spacing: 0.05em; /* More spacing */
+    white-space: nowrap; /* Prevent header text from wrapping */
+}
+
+/* Consistent alternating row shades for ALL table body rows (data and summary) */
+#dataContainer tbody tr:nth-child(even) {
+    background-color: #1e1e20; /* Darker charcoal */
+}
+#dataContainer tbody tr:nth-child(odd) {
+    background-color: #1a1a1c; /* Even darker charcoal */
+}
+#dataContainer tbody tr:hover {
+    background-color: rgba(50, 50, 60, 0.8); /* Hover effect for rows - kept */
+}
+
+/* Specific cell styling for better layout */
+#dataContainer td:last-child {
+    white-space: nowrap; /* Prevent action buttons from wrapping */
+    min-width: 120px; /* Ensure enough space for buttons */
+}
+#dataContainer td {
+    word-wrap: break-word; /* Allow long words to break */
+    white-space: normal; /* Allow text to wrap naturally */
+}
+/* Ensure notes column can wrap text */
+#dataContainer td:nth-child(6) { /* Assuming Notes is the 6th column */
+    max-width: 250px; /* Max width for notes column to allow wrapping */
+    word-break: break-word; /* Break long words */
+}
+
+
+/* Summary Table Specific Styles */
+.summary-table .sticky-col {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    left: 0;
+    /* Background will be inherited from the parent tr's alternating color */
+    z-index: 10;
+    box-shadow: none; /* Removed the shadow to fix the vertical line */
+}
+
+.summary-table thead .sticky-col {
+    z-index: 12; /* Ensure header sticky column is on top */
+    background-color: rgba(18, 18, 22, 0.9); /* Match general header background */
+}
+
+/* Ensure sticky column backgrounds follow the alternating row shades for all rows */
+.summary-table tbody tr:nth-child(even) .sticky-col {
+    background-color: #1e1e20 !important; /* Match even row background */
+}
+.summary-table tbody tr:nth-child(odd) .sticky-col {
+    background-color: #1a1a1c !important; /* Match odd row background */
+}
+
+/* Ensure total summary rows and total column follow the alternating row shades */
+/* Set to inherit so they follow the alternating rows defined above */
+.summary-table tr.summary-total-row,
+.summary-table .total-col {
+    background-color: inherit !important;
+    color: #e0e0e0; /* Maintain text color */
+    font-weight: 700;
+}
+
+/* Ensure header of total column matches general header background */
+.summary-table thead .total-col {
+    background-color: rgba(18, 18, 22, 0.9) !important; /* Match general header background */
+    color: #a0a0a0;
+}
+
+/* Chart container specific styling */
+#utilizationChartContainer {
+    position: relative; /* Needed for responsive canvas sizing */
+    height: 400px; /* Increased height for the chart container */
+    width: 100%; /* Ensure it takes full width */
+}
+#utilizationChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+/* Danger Zone Specific Styling - UNCHANGED */
+.danger-zone-card {
+    background-color: rgba(139, 0, 0, 0.15); /* Darker red, more transparent */
+    border: 1px solid rgba(255, 0, 0, 0.4); /* More prominent red border */
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2); /* Reddish shadow */
+    margin-top: 2rem; /* Add some space above it */
+}
+
+.danger-zone-card h2 {
+    color: #ffcccc; /* Lighter red for heading */
+    margin-bottom: 1rem;
+}
+
+.danger-zone-card p {
+    color: #ff9999; /* Even lighter red for description */
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn-danger {
+    background: linear-gradient(90deg, #d32f2f, #a32222); /* Darker red gradient - original */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.6rem;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+    border: none;
+    display: flex; /* Enable flex for icon and text alignment */
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem; /* Space between icon and text */
+}
+
+.btn-danger:hover {
+    background: linear-gradient(90deg, #a32222, #d32f2f); /* Original hover gradient */
+    box-shadow: 0 6px 15px rgba(211, 47, 47, 0.5);
+    transform: translateY(-2px);
+}
+.btn-danger:disabled {
+    background: linear-gradient(90deg, #6b6b6b, #5a5a5a);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.7;
+}
+
+/* Icon styling within buttons */
+.btn-danger i {
+    font-size: 1.1em; /* Adjust icon size */
+}
+
+
+/* Modal specific styles for a custom select in modal - UNCHANGED */
+#messageModal select {
+    background-color: #374151; /* Match other modal inputs */
+    border: 1px solid #4B5563;
+    color: #D1D5DB;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    width: 100%;
+}
+#messageModal select:focus {
+    border-color: #6366F1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+}
+
+/* Radio button in modal styling - UNCHANGED */
+#messageModal input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #6B7280; /* Gray border */
+    border-radius: 50%; /* Make it circular */
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    vertical-align: middle;
+}
+
+#messageModal input[type="radio"]:checked {
+    background-color: #6366F1; /* Indigo when checked */
+    border-color: #6366F1;
+    position: relative;
+}
+
+#messageModal input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: white; /* Inner white circle */
+}
+
+#messageModal label.inline-flex {
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Ensure actions column doesn't create horizontal scroll - UNCHANGED */
+@media (max-width: 768px) {
+    #dataContainer table {
+        min-width: unset; /* Remove min-width on smaller screens */
+    }
+    #dataContainer th, #dataContainer td {
+        padding: 0.6rem 0.8rem; /* Reduce padding further */
+    }
+    #dataContainer td:last-child {
+        min-width: 100px; /* Adjust min-width for action buttons on small screens */
+    }
+    #dataContainer td:nth-child(6) { /* Notes column */
+        max-width: 150px; /* Make notes column narrower on small screens */
+    }
+}
