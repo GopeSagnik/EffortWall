@@ -19,7 +19,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/effortwall/assets/EWLogo-DWpa3at_.png">
 
-  <script type="module" crossorigin src="/effortwall/assets/index-Bd7YGdSv.js"></script>
+  <script type="module" crossorigin src="/effortwall/assets/index-BliwFJ3l.js"></script>
   <link rel="stylesheet" crossorigin href="/effortwall/assets/index-DusmrNkw.css">
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -258,6 +258,15 @@
                         </div>
                     </div>
 
+                    <!-- Export Data Button -->
+                    <div class="card mb-6">
+                        <h2 class="text-xl font-semibold text-gray-100 mb-4">Export Data</h2>
+                        <button id="exportDataBtn" class="btn-primary w-full flex items-center justify-center gap-2">
+                            <i class="fas fa-file-csv"></i> <span id="exportDataBtnText">Export All Data to CSV</span>
+                            <div id="exportDataSpinner" class="spinner hidden"></div>
+                        </button>
+                    </div>
+
                     <!-- Danger Zone (New Section) -->
                     <div class="card danger-zone-card mt-6">
                         <h2 class="text-xl font-semibold text-red-300 mb-4 flex items-center gap-2">
@@ -294,6 +303,6 @@
         <div id="messageModal"></div>
     </div>
 
-    <!-- Link to your JavaScript files -->
+    <!-- Link to your JavaScript files --> <!-- NEW: Export Module -->
 </body>
 </html>
