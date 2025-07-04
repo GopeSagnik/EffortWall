@@ -1,18 +1,18 @@
 import { defineConfig } from "vite";
-// Assuming you still have this plugin if you were using React
+// If you are using React, you might have this import:
 // import react from '@vitejs/plugin-react';
 import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // Use process.env.VITE_REPO_NAME to get the repository name from the .env file
-  // Ensure the environment variable is loaded correctly by Vite.
-  // The 'base' path needs to start and end with a slash.
-  base: `/${process.env.VITE_REPO_NAME || 'default-repo-name'}/`,
+  // IMPORTANT: This 'base' property tells Vite where your assets will be located.
+  // For https://gopesagnik.github.io/effortwall/, the base path is '/effortwall/'.
+  // Ensure your .env file has VITE_REPO_NAME="effortwall"
+  base: `/${process.env.VITE_REPO_NAME || 'effortwall'}/`,
 
   plugins: [
     tailwindcss(),
-    // If you were using React, uncomment the line below:
+    // If you are using React, uncomment the line below:
     // react(),
   ],
 

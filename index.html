@@ -15,6 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <!-- html2canvas CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- JSZip CDN for zipping files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <!-- Link to your custom CSS file -->
     <link rel="stylesheet" href="./style/style.css">
     <!-- Favicon -->
@@ -134,7 +136,7 @@
                     <button class="px-3 py-1 rounded-full bg-indigo-700 text-white shadow-sm" id="tableViewBtn">Table</button>
                     <button class="px-3 py-1 rounded-full bg-gray-700 hover:bg-gray-600" id="chartsViewBtn">Summary</button>
                     <button class="px-3 py-1 rounded-full bg-gray-700 hover:bg-gray-600" id="holidaysViewBtn">Holidays</button>
-                    <button class="px-3 py-1 rounded-full bg-gray-700 hover:bg-gray-600" id="manageViewBtn">Manage</button>
+                    <button class="px-3 py-1 rounded-full bg-gray-700 hover:bg-gray-600" id="manageViewBtn">⚠️Manage⚠️</button>
                 </div>
 
                 <!-- Filter Controls - These will apply to Table, Holidays, and Summary (Charts) views -->
@@ -257,6 +259,15 @@
                         </div>
                     </div>
 
+                    <!-- Export Data Button -->
+                    <div class="card mb-6">
+                        <h2 class="text-xl font-semibold text-gray-100 mb-4">Export Data</h2>
+                        <button id="exportDataBtn" class="btn-primary w-full flex items-center justify-center gap-2">
+                            <i class="fas fa-file-csv"></i> <span id="exportDataBtnText">Export All Data to CSV</span>
+                            <div id="exportDataSpinner" class="spinner hidden"></div>
+                        </button>
+                    </div>
+
                     <!-- Danger Zone (New Section) -->
                     <div class="card danger-zone-card mt-6">
                         <h2 class="text-xl font-semibold text-red-300 mb-4 flex items-center gap-2">
@@ -294,7 +305,11 @@
     </div>
 
     <!-- Link to your JavaScript files -->
+    <!-- Ensure script.js is loaded first among your custom modules -->
     <script type="module" src="./lib/script.js"></script>
     <script type="module" src="./lib/clipboardModule.js"></script>
+    <script type="module" src="./lib/manageModule.js"></script> 
+    <script type="module" src="./lib/chartModule.js"></script>   
+    <script type="module" src="./lib/exportModule.js"></script>  
 </body>
 </html>
